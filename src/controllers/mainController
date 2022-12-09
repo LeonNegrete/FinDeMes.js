@@ -8,7 +8,7 @@ const mainController = {
         return JSON.parse(readed); //Se transforma de JSON a objeto literal
     },
     index:(req,res)=>{
-        res.render('index');
+        res.sendFile(path.join(__dirname, '../views/index.html'));
     },
     cantidad:(req,res)=>{
         return res.send(req.body)
