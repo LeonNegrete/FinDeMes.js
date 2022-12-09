@@ -1,0 +1,54 @@
+const express = require('express');
+const fs = require('fs');
+const app = express();
+const path = require('path');
+const mainController = {
+    guardadosArr: () => {
+        let readed = fs.readFileSync(path.resolve(__dirname, '../data/guarados.json'), 'utf-8'); //Se le asigna el JSON a la variable readed
+        return JSON.parse(readed); //Se transforma de JSON a objeto literal
+    },
+    index:(req,res)=>{
+        res.render('index');
+    },
+    cantidad:(req,res)=>{
+        return res.send(req.body)
+/*         let ingresos = req.body.ingresos;
+        let gastos = req.body.gastos;
+        let aGuardar = {
+            ingresos,gastos
+        }
+        let cambio = mainController.guardadosArr().push(aGuardar)
+        fs.writeFileSync(path.join(__dirname, '../data/guardados.json'), JSON.stringify(cambio))
+        res.redirect('/valores') */
+    },
+    valores:(req,res)=>{
+        let datos = {
+            trabajo:{
+                sueldo:103000,
+                ingreso:new Date(2022,4),
+                mesesAntiguedad: ()=>{
+                    let months = (fechaDeHoy.getFullYear - trabajo.ingreso.getFullYear)*12
+                    months -= trabajo.ingreso.getMonth
+                    months += fechaDeHoy.getMonth
+                    return months <= 0? 0: months
+                },
+                aguinaldo: ()=> {
+                    if (trabajo.mesesAntiguedad() < 6){
+                        return (trabajo.sueldo / 12) * trabajo.mesesAntiguedad()
+                    }else{
+                        return trabajo.sueldo / 2
+                    }
+                },
+                aumento: (porcentaje)=>{
+                    trabajo.sueldo += (trabajo.sueldo/100) * porcentaje
+                }
+            }
+        }
+        mainController.send(this.guardadosArr())
+    },
+/*     results:(req,res)=>{
+
+    } */
+}
+
+module.exports = mainController;
