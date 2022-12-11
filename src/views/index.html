@@ -6,17 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingrese cantidades</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <form id="form" action="" method="post">
-        <label for="Nombre">Nombre de ingreso</label>
-        <input type="text" name="ingresoNombre" id="ingresoNombre">
-        <label for="Monto">Monto</label>
-        <input type="number" name="ingresoMonto" id="ingresoMonto">
+    <form class="form" id="form" action="" method="post">
         
-        <button id="ingresar" type="submit">Ingresar</button>
+        
+        <div class="formContent">
+            <label for="Nombre" class="label mt-6">Nombre de ingreso</label>
+            <input class="input is-primary column mb-1"  type="text" name="ingresoNombre" id="ingresoNombre">
+            <label for="Monto" class="label mt-2">Monto</label>
+            <input class="input is-primary column mb-1"  type="number" name="ingresoMonto" id="ingresoMonto">
+        </div>
+        
+        <div class="botones">
+            <button  class="button is-link is-outlined my-1" id="ingresar" type="submit">Ingresar</button>
+            <button  class="button is-link is-outlined my-1" id="masCampos">+</button>
+        </div>
+
     </form>
-    <button id="masCampos">+</button>
+    
+    
     <script type="text/javascript" src="/javascript/index.js"></script>
 </body>
 </html>
