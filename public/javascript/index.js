@@ -59,20 +59,27 @@ let gasto = calcular(gastos); */
 
 
 window.addEventListener('load', ()=>{
-
     let botonMas = document.querySelector('#masCampos');
     let form = document.querySelector('#form');
     let body = document.querySelector('body');
     let formContent = document.querySelector('.formContent')
     let ingresar = document.querySelector('#ingresar');
-
+    let nombreLabel = document.querySelector('#nombreLabel')
+    
+    
     let count = 1
     botonMas.addEventListener('click', (e)=>{
         e.preventDefault();
         let newLabelTxt = document.createElement('label')
         newLabelTxt.for = 'ingresoNombre' + count
-        newLabelTxt.innerText = 'Nombre de ingreso'
+        if (body.querySelector('.results') == null){
+            newLabelTxt.innerText = 'Nombre de ingreso'
+        }else{
+            newLabelTxt.innerText = 'Nombre de gasto'
+        }
+        
         newLabelTxt.classList.add('label','mt-5')
+        newLabelTxt.setAttribute('id','nombreLabel')
 
         let newLabelNum = document.createElement('label')
         newLabelNum.for = 'ingresoMonto' + count
@@ -102,67 +109,53 @@ window.addEventListener('load', ()=>{
         e.preventDefault();
         let data = new FormData(form)
         let dataObj = Object.fromEntries(data);   
-        let results = document.createElement('p')
-        results.classList.add('results')
-        results.innerText += `Tus gastos:\n`
-        let gastoTotal = 0;
-        for (let [key,value] of Object.entries(dataObj)){
-            console.log(key)
-            if (key.includes('Nombre')){
-                results.innerHTML += `${value}: `;
-            }else{
-                results.innerHTML += `${value}<br>`;
-                gastoTotal += +value
+        console.log(body.querySelector('.results'))
+        if (body.querySelector('.results') == null){
+            let results = document.createElement('p')
+            results.classList.add('results')
+            results.innerText += `Tus Ingresos:\n`
+            let gastoTotal = 0;
+            for (let [key,value] of Object.entries(dataObj)){
+                if (key.includes('Nombre')){
+                    results.innerHTML += `${value}: `;
+                }else{
+                    results.innerHTML += `${value}<br>`;
+                    gastoTotal += +value
+                }
+                
             }
-            
-        }
-        results.innerHTML +=`<br> Total: ${gastoTotal}`
-        body.appendChild(results);
-
-
-        //agregar creacion dinamica de form ingresos
-        //remplazar nombres de lo pegado debajo
-        let count = 1
-        let botonMasIng = document.createElement('button');
-        botonMasIng.id = 'botonMasIng'
-        botonMasIng.addEventListener('click', ()=>{
-        let newInputTxt = document.createElement('input')
-        newInputTxt.setAttribute('type', 'text')
-        newInputTxt.setAttribute('id', count)
-        newInputTxt.setAttribute('name', 'ingresoNombre' + count)
-        newInputTxt.classList.add('input is-primary column is-one-quarter')
-        let newInputNum = document.createElement('input')
-        newInputNum.setAttribute('type', 'Number')
-        newInputNum.setAttribute('id', count)
-        newInputNum.setAttribute('name', 'ingresoMonto' + count)
-        newInputNum.classList.add('input is-primary column is-one-quarter')
-        count++
-
-        form.appendChild(newInputTxt)
-        form.appendChild(newInputNum)
-        })
-        form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        let data = new FormData(form)
-        let dataObj = Object.fromEntries(data);   
-        let results = document.createElement('p')
-        results.innerText += `Tus gastos:\n`
-        let gastoTotal = 0;
-        for (let [key,value] of Object.entries(dataObj)){
-            console.log(key)
-            if (key.includes('Nombre')){
-                results.innerHTML += `${value}: `;
-            }else{
-                results.innerHTML += `${value}<br>`;
-                gastoTotal += +value
+            results.innerHTML +=`<br> Total: ${gastoTotal}`
+            body.appendChild(results);
+            results.classList.toggle('animation');  
+            form.classList.toggle('animation');
+            nombreLabel.innerText = 'Nombre de gastos'
+            let newLabelsTxt = document.querySelectorAll('#nombreLabel')
+            for (const label of newLabelsTxt) {
+                label.innerText = 'Nombre de gastos'
             }
-            
+            //Limpio inputs
+            for (const each of document.querySelectorAll('.input')){
+                each.value = '';
+            }
+        }else{
+            let resultsExpense = document.createElement('p')
+            resultsExpense.classList.add('resultsExpense')
+            resultsExpense.innerText += `Tus Gastos:\n`
+            let gastoTotal = 0;
+            for (let [key,value] of Object.entries(dataObj)){
+                if (key.includes('Nombre')){
+                    resultsExpense.innerHTML += `${value}: `;
+                }else{
+                    resultsExpense.innerHTML += `${value}<br>`;
+                    gastoTotal += +value
+                }
+                
+            }
+            resultsExpense.innerHTML +=`<br> Total: ${gastoTotal}`
+            body.appendChild(resultsExpense);
+            resultsExpense.classList.toggle('animation'); 
+            form.classList.toggle('lastAnimation');
         }
-        results.innerHTML +=`<br> Total: ${gastoTotal}`
-        body.appendChild(results);
-
-        console.log(Object.entries(dataObj))
-        })
     })
 
 
@@ -245,33 +238,3 @@ window.addEventListener('load', ()=>{
 })
 
 
-
-
-
-
-
-
-
-
-//Pruebas y uso en consola:
-
-
-/* console.log(`Tus gastos:`)
-console.log(`________________________________________________________`)
-for (gastoArg in gastos){
-    console.log(`${gastoArg} : ${gastos[gastoArg]}`)
-}
-console.log(`________________________________________________________`)
-console.log(`Total: ${gasto}`)
-console.log(`________________________________________________________`)
-console.log('...')
-console.log(`Tus ingresos`)
-console.log(`________________________________________________________`)
-for (ingresoArg in ingresos){
-    console.log(`${ingresoArg} : ${ingresos[ingresoArg]}`)
-}
-console.log(`________________________________________________________`)
-console.log(`Total: ${ingreso}`)
-console.log(`________________________________________________________`)
-console.log('...')
-console.log(ingreso-gasto > 0 ? `Tenes un restante de ${ingreso-gasto}`:`Tenes un deficit de ${ingreso-gasto}`) */
