@@ -4,6 +4,7 @@
     font-weight: normal;
     src: local('Typold ExtraBold'), url('The Northern Block Ltd - Typold ExtraBold.woff') format('woff');
 }
+
 body{
     font-family:'Typold ExtraBold';
     color: #272343;
@@ -48,25 +49,78 @@ a{
     margin: 0px 10px;
     color: #272343;
 }
+section{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+h1{
+    font-size: 2.5rem;
+}
+.textContent{
+    width: 50%;
+
+}
+.logoPadre{
+    position: absolute;
+}
+.animacion{
+    display: flex;
+    justify-content: flex-end;
+    width: 40%;
+}
+.moneda{
+    position: absolute;
+    left: 28%;
+    top:-5%;
+    animation-name: goDown;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+
+}
+.caja{
+    width: 35%;
+    height:30%;
+    z-index: 2;
+    position: absolute;
+    top:36%;
+    left:28.5%;
+    background-color: #e3f6f5;
+}
+
+@keyframes goDown{
+    0%{
+        top:-5%
+    }
+    100%{
+        top:10%
+    }
+}
+.logo2{
+    width: 90%;
+    z-index: 3;
+}
+
+
 .results{
-    position: relative;
-    left: 5rem;
-    top: 4rem;
+    position: absolute;
+    left: 50%;
+    top:50%;
     
 }
 .resultsExpense{
-    position: relative;
-    left: -5rem;
-    top: 4rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 .form{
     display: flex;
     justify-content:center;
     flex-direction: column;
-    align-items:flex-start;
-    position: relative;
-    left: 4rem;
-   
+    align-items:flex-start;   
+    position: absolute;
 }
 .results.animation{
     animation-name: resultsToOpacity;
@@ -89,12 +143,12 @@ a{
     animation-fill-mode:forwards;
 }
 @keyframes formToRight {
-    0%{left: 4rem;}
+    0%{left:9%;}
     /* 50%{left: 4.5rem;} */
-    100%{left:15rem;}
+    100%{left:25%;}
 }
 @keyframes formAllTheWay {
-    0%{left:15rem;}
+    0%{left:25%;}
     /* 50%{left: 4.5rem;} */
     99%{left:69%;opacity: 0%;}  
     100%{left:69%;opacity: 0%; visibility: hidden;}
@@ -102,12 +156,12 @@ a{
 @keyframes resultsToOpacity {
     0%{opacity:0%;}
     /* 50%{left: 4.5rem;} */
-    100%{left:-10rem; opacity:100%;}
+    100%{left:10%; opacity:100%;}
 }
 @keyframes resultsExpenseToOpacity {
     0%{opacity:0%; left: 1rem;}
     /* 50%{left: 4.5rem;} */
-    100%{left:-9rem; opacity:100%;}
+    100%{left:25%; opacity:100%;}
 }
 .botones{
     display: flex;
