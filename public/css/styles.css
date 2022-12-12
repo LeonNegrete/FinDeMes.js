@@ -68,3 +68,11 @@ body{
 button{
     margin: 0.1rem ;
 }
+table{
+    table-layout: fixed;
+    max-height: 2em;
+    width: 11em;
+}
+td{
+    word-wrap: break-word;
+}

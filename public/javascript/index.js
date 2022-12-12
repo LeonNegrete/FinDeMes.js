@@ -107,24 +107,37 @@ window.addEventListener('load', ()=>{
     })
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        let data = new FormData(form)
-        let dataObj = Object.fromEntries(data);   
-        console.log(body.querySelector('.results'))
-        if (body.querySelector('.results') == null){
-            let results = document.createElement('p')
-            results.classList.add('results')
-            results.innerText += `Tus Ingresos:\n`
-            let gastoTotal = 0;
-            for (let [key,value] of Object.entries(dataObj)){
-                if (key.includes('Nombre')){
-                    results.innerHTML += `${value}: `;
+        let data = new FormData(form)//Toma cada valor de los input
+        let dataObj = Object.fromEntries(data);//Convierte los valores en un objeto  
+        if (body.querySelector('.results') == null){ //Evalua si todavia no se enviaron los ingresos
+            let results = document.createElement('table') //Crea la tabla de ingresos
+            results.classList.add('results','table','is-bordered','is-narrow') //Estilos de la tabla de ingresos
+            let gastoTotal = 0; //Inicializa la variable que acumulara el total de ingesos
+            
+            for (let [key,value] of Object.entries(dataObj)){ //Itera cada valor del input
+                if (key.includes('Nombre')){ //Evalua si es un Nombre de ingreso
+                    var tr = document.createElement('tr');//row que sera atrapada en esta iteracion y la siguiente
+                    let td = document.createElement('td');//cell que tendra el valor de la iteracion (Nombre de ingreso)
+                    td.innerText = `${value}`
+                    tr.appendChild(td)
                 }else{
-                    results.innerHTML += `${value}<br>`;
+                    let td = document.createElement('td')//cell que tendra el valor de la iteracion (monto)
+                    td.innerText = `${value}`
+                    tr.appendChild(td)
+                    results.appendChild(tr)
                     gastoTotal += +value
                 }
-                
             }
-            results.innerHTML +=`<br> Total: ${gastoTotal}`
+            //Armando el total en la tabla
+            let trTotal = document.createElement('tr')
+            let tdTotalTxt = document.createElement('td')
+            let tdTotal = document.createElement('td')
+            tdTotalTxt.innerText = 'Total'
+            trTotal.appendChild(tdTotalTxt)
+            tdTotal.innerText = gastoTotal
+            trTotal.appendChild(tdTotal);
+            results.appendChild(trTotal);
+
             body.appendChild(results);
             results.classList.toggle('animation');  
             form.classList.toggle('animation');
@@ -153,6 +166,9 @@ window.addEventListener('load', ()=>{
             }
             resultsExpense.innerHTML +=`<br> Total: ${gastoTotal}`
             body.appendChild(resultsExpense);
+
+
+            
             resultsExpense.classList.toggle('animation'); 
             form.classList.toggle('lastAnimation');
         }
