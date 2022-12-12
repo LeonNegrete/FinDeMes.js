@@ -1,5 +1,52 @@
+@font-face {
+    font-family: 'Typold ExtraBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Typold ExtraBold'), url('The Northern Block Ltd - Typold ExtraBold.woff') format('woff');
+}
 body{
+    font-family:'Typold ExtraBold';
+    color: #272343;
+    width: 90%;
+    max-width: 1040px;
+    margin:auto auto;
+    background-color: #fffffe;
+}
+header{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    margin-top: 30px;
+}
+.logoDiv{
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+}
+.logo{
+    height: 2em;
+    margin-right: 10px;
+}
+.logo.text{
+    height: auto;
+}
+.button.is-warning{
+    font-size: 16px;
+    font-family:'Typold ExtraBold' ;
+    border-radius: 15px;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+a{
+    font-size: 16px;
+    margin: 0px 10px;
+    color: #272343;
 }
 .results{
     position: relative;
